@@ -14,5 +14,8 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
+# Binary build files
+bin/
+
 # local file with keys - excluded
 keys.txt
