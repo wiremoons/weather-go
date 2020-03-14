@@ -1,7 +1,7 @@
 #
 #	Makefile for Go Language code
 #
-SRC=weather-main.go
+SRC=weather.go output.go getURL.go
 OUTNAME=bin/weather-go
 # Go compiler settings
 CC=go
