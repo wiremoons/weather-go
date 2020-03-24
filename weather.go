@@ -16,21 +16,17 @@ import (
 	"time"
 )
 
-// SET GLOBAL VARIABLES
-// set the version of the app and prep var to hold app name
-var appversion = "0.2.0"
-var appname string
-
-// flag() variables used for command line args
-var debugSwitch bool
-var helpMe bool
-var showVer bool
-
-// used to hold any errors
-var err error
-
-// used to hold the JSON parsed data
-var ParsedData WeatherMain
+var (
+	appversion = "0.2.0"
+	appname    string
+	// flag() variables CLI args
+	debugSwitch bool
+	helpMe      bool
+	showVer     bool
+	err         error
+	// used to hold the JSON parsed data - use pointer instead?
+	ParsedData WeatherMain
+)
 
 // define main top level values to extract from JSON input
 type WeatherMain struct {
@@ -64,9 +60,7 @@ type UnixEpoch struct {
 	time.Time
 }
 
-// init() always runs before the applications main() function and is
-// used here to set-up the flag() variables from the command line
-// parameters - which are provided by the user when they run the app.
+// init() always runs before the applications main() function
 func init() {
 	// flag types available are: IntVar; StringVar; BoolVar
 	// flag parameters are: variable; cmd line flag; initial value; description.
@@ -78,7 +72,6 @@ func init() {
 	flag.Parse()
 	// get the name of the application as called from the command line
 	appname = filepath.Base(os.Args[0])
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -94,19 +87,18 @@ func main() {
 		os.Exit(0)
 	}()
 
-	// confirm if debug mode is enabled and display other command line
-	// flags and their current status
+	// if debug mode is enabled then display other command line
+	// flag settings and their current status
 	if debugSwitch {
 		fmt.Println("DEBUG: Debug mode enabled")
-		fmt.Printf("DEBUG: Number of command line arguments set by user is: %d\n", flag.NFlag())
-		fmt.Println("DEBUG: Command line argument settings are:")
-		fmt.Println("\t\tDisplay additional debug output when run:", strconv.FormatBool(debugSwitch))
-		fmt.Println("\t\tDisplay additional help information:", strconv.FormatBool(helpMe))
-		fmt.Println("\t\tShow the applications version:", strconv.FormatBool(showVer))
+		fmt.Printf("DEBUG: Total CLI arguments: %d\n", flag.NFlag())
+		fmt.Println("DEBUG: CLI arguments set:")
+		fmt.Println("\t\tShow 'debug' output:", strconv.FormatBool(debugSwitch))
+		fmt.Println("\t\tShow help:", strconv.FormatBool(helpMe))
+		fmt.Println("\t\tShow version:", strconv.FormatBool(showVer))
 	}
 
-	// override Go standard flag.Usage() function to get better
-	// formating and output by using my own function instead
+	// override Go standard flag.Usage() function
 	flag.Usage = func() {
 		if debugSwitch {
 			fmt.Println("DEBUG: Running flag.Usage override function")
@@ -114,19 +106,26 @@ func main() {
 		myUsage(appname)
 	}
 
-	// check if the use just wanted some help?
+	// check if the user requested help?
 	if helpMe {
 		flag.Usage()
 		runtime.Goexit()
 	}
-	// check if the user just wanted the app version info?
+	// check if the user requested app version?
 	if showVer {
 		versionInfo(appname, appversion)
 		runtime.Goexit()
 	}
 
 	// Obtain URL from function in 'GetURL.go' source file
-	url, err := GetURL()
+	// TODO: get coords from settings first
+	url, err := GetURL("51.419212,-3.291481")
+	// exit app if url request errors
+	if err != nil {
+		fmt.Println("\nWARNING HTTP ERROR:\n", err)
+		runtime.Goexit()
+	}
+
 	// configure the web request
 	var myClient = &http.Client{Timeout: 10 * time.Second}
 
