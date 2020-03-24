@@ -1,9 +1,11 @@
 # Binaries for programs and plugins
-*.exe
-*.exe~
 *.dll
 *.so
 *.dylib
+
+# binary versions of the program
+weather
+weather.exe
 
 # Test binary, built with `go test -c`
 *.test
