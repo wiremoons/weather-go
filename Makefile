@@ -1,11 +1,11 @@
 #
 #	Makefile for Go Language code
 #
-SRC=weather.go output.go getURL.go
+SRC=*.go 
 OUTNAME=bin/weather-go
 # Go compiler settings
 CC=go
-CFLAGS=build
+CFLAGS=build -ldflags="-s -w"
 RFLAGS=run
 #
 # To build for Linux 32bit ARM
