@@ -1,0 +1,58 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ARM32	Makefile	/^ARM32=GOOS=linux GOARCH=arm$/;"	m
+BASEURL	getDarkSkyUrl.go	/^const BASEURL = "https:\/\/api.darksky.net\/forecast\/"$/;"	c
+CC	Makefile	/^CC=go$/;"	m
+CFLAGS	Makefile	/^CFLAGS=build$/;"	m
+Currently	parseDarkSkyJSON.go	/^type Currently struct {$/;"	t
+Daily	parseDarkSkyJSON.go	/^type Daily struct {$/;"	t
+FREE64	Makefile	/^FREE64=GOOS=freebsd GOARCH=amd64$/;"	m
+GetURL	getDarkSkyUrl.go	/^func GetURL(coord string) (url string, err error) {$/;"	f
+LIN32	Makefile	/^LIN32=GOOS=linux GOARCH=386$/;"	m
+LIN64	Makefile	/^LIN64=GOOS=linux GOARCH=amd64$/;"	m
+MAC32	Makefile	/^MAC32=GOOS=darwin GOARCH=386$/;"	m
+MAC64	Makefile	/^MAC64=GOOS=darwin GOARCH=amd64$/;"	m
+OUTNAME	Makefile	/^OUTNAME=bin\/weather-go$/;"	m
+OutputForecast	outputWeather.go	/^func OutputForecast(ParsedData WeatherMain) (err error) {$/;"	f
+ParsedData	parseDarkSkyJSON.go	/^	ParsedData WeatherMain$/;"	v
+Place	getGeoLoc.go	/^type Place struct {$/;"	t
+PlaceData	getGeoLoc.go	/^	PlaceData Place$/;"	v
+RFLAGS	Makefile	/^RFLAGS=run$/;"	m
+SRC	Makefile	/^SRC=weather.go output.go getURL.go$/;"	m
+UnixEpoch	parseDarkSkyJSON.go	/^type UnixEpoch struct {$/;"	t
+UnmarshalJSON	parseDarkSkyJSON.go	/^func (t *UnixEpoch) UnmarshalJSON(b []byte) error {$/;"	f
+WIN32	Makefile	/^WIN32=GOOS=windows GOARCH=386$/;"	m
+WIN64	Makefile	/^WIN64=GOOS=windows GOARCH=amd64$/;"	m
+WeatherMain	parseDarkSkyJSON.go	/^type WeatherMain struct {$/;"	t
+appname	weather.go	/^	appname    string$/;"	v
+appversion	weather.go	/^	appversion = "0.2.0"$/;"	v
+debugSwitch	weather.go	/^	debugSwitch bool$/;"	v
+err	weather.go	/^	err         error$/;"	v
+getAPIKey	getGeoLoc.go	/^func getAPIKey() (apiGeoKey string, err error) {$/;"	f
+getConfigFile	getSettings.go	/^func getConfigFile() (weatherConfig string) {$/;"	f
+getLocLongLat	getGeoLoc.go	/^func getLocLongLat(locTown, locCountry string) string {$/;"	f
+getLocPlace	getGeoLoc.go	/^func getLocPlace(latLong string) string {$/;"	f
+getSettings	getSettings.go	/^func getSettings() (err error) {$/;"	f
+helpMe	weather.go	/^	helpMe      bool$/;"	v
+init	weather.go	/^func init() {$/;"	f
+loadWeatherSetting	getSettings.go	/^func loadWeatherSetting(weatherConfig string) (err error) {$/;"	f
+main	getDarkSkyUrl.go	/^package main$/;"	p
+main	getGeoLoc.go	/^package main$/;"	p
+main	getSettings.go	/^package main$/;"	p
+main	outputHelp.go	/^package main$/;"	p
+main	outputVersion.go	/^package main$/;"	p
+main	outputWeather.go	/^package main$/;"	p
+main	parseDarkSkyJSON.go	/^package main$/;"	p
+main	weather.go	/^func main() {$/;"	f
+main	weather.go	/^package main$/;"	p
+myUsage	outputHelp.go	/^func myUsage(appname string) {$/;"	f
+parseDarkSkyJSON	parseDarkSkyJSON.go	/^func parseDarkSkyJSON(url string) {$/;"	f
+settingsExist	getSettings.go	/^func settingsExist(weatherConfig string) bool {$/;"	f
+showVer	weather.go	/^	showVer     bool$/;"	v
+versionInfo	outputVersion.go	/^func versionInfo(appname string, appversion string) {$/;"	f
+weatherConfig	getSettings.go	/^	weatherConfig string = ""$/;"	v
+weatherOutTmpl	outputWeather.go	/^var weatherOutTmpl = `$/;"	v
