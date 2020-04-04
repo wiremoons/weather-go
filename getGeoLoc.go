@@ -1,4 +1,4 @@
-// find geo location via either postal address or via longitide and latitude
+// find geo location via either postal address or via longitude and latitude
 //
 package main
 
@@ -47,7 +47,7 @@ func getLocPlace(latLong string) string {
 	if err != nil {
 		fmt.Println("ERROR: ", err)
 		fmt.Println("Set environment variable for Google Places API key as: 'export GAPI=\"<api_key_here>\"'")
-		runtime.Goexit()
+		return "UNKNOWN"
 	}
 	if debugSwitch {
 		fmt.Println("API Key is:", apiKey)
@@ -55,7 +55,7 @@ func getLocPlace(latLong string) string {
 
 	// check long lat exists
 	if latLong == "" {
-		fmt.Println("ERROR: missing latitide and longitude for geolocation look up.")
+		fmt.Println("ERROR: missing latitude and longitude for geolocation look up.")
 		runtime.Goexit()
 	}
 
@@ -78,7 +78,7 @@ func getLocPlace(latLong string) string {
 	}
 	defer resp.Body.Close()
 
-	// check the HTTP reponse code
+	// check the HTTP response code
 	if debugSwitch {
 		fmt.Println("DEBUG: HTTP Response Status:", resp.StatusCode, http.StatusText(resp.StatusCode))
 	}
