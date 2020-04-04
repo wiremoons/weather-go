@@ -1,73 +1,0 @@
-
-getDarkSkyUrl.go,154
-package mainmain4,7
-const BASEURL = "https://api.darksky.net/forecast/"BASEURL10,40
-func GetURL(coord string) (url string, err error) {GetURL15,237
-
-getSettings.go,543
-package mainmain5,78
-	weatherConfig  string = ""weatherConfig17,221
-	weatherSetting WeatherSettingsweatherSetting18,249
-type WeatherSettings struct {WeatherSettings23,418
-func getSettings() (err error) {getSettings32,687
-func getConfigFile() (weatherConfig string) {getConfigFile51,1175
-func settingsExist(weatherConfig string) bool {settingsExist67,1596
-func loadWeatherSetting(weatherConfig string) (err error) {loadWeatherSetting75,1799
-func saveWeatherSetting(weatherConfig string) (err error) {saveWeatherSetting90,2233
-
-getGeoLoc.go,297
-package mainmain3,80
-	PlaceData PlacePlaceData16,234
-type Place struct {Place20,316
-func getAPIKey() (apiGeoKey string, err error) {getAPIKey32,675
-func getLocPlace(latLong string) string {getLocPlace43,1124
-func getLocLongLat(locTown, locCountry string) string {getLocLongLat126,3688
-
-parseDarkSkyJSON.go,363
-package mainmain5,10
-	ParsedData WeatherMainParsedData18,169
-type WeatherMain struct {WeatherMain22,255
-type Currently struct {Currently31,533
-type Daily struct {Daily44,1031
-type UnixEpoch struct {UnixEpoch49,1147
-func parseDarkSkyJSON(url string) {parseDarkSkyJSON56,1369
-func (t *UnixEpoch) UnmarshalJSON(b []byte) error {UnmarshalJSON125,3822
-
-weather.go,282
-package mainmain5,67
-	appversion = "0.2.0"appversion17,159
-	appname    stringappname18,181
-	debugSwitch booldebugSwitch20,230
-	helpMe      boolhelpMe21,248
-	showVer     boolshowVer22,266
-	err         errorerr23,284
-func init() {init27,368
-func main() {main43,1139
-
-outputWeather.go,148
-package mainmain5,10
-var weatherOutTmpl = `weatherOutTmpl13,109
-func OutputForecast(ParsedData WeatherMain) (err error) {OutputForecast43,902
-
-Makefile,491
-SRC=weather.go output.go getURL.goSRC4,36
-OUTNAME=bin/weather-goOUTNAME5,71
-CC=goCC7,117
-CFLAGS=buildCFLAGS8,123
-RFLAGS=runRFLAGS9,136
-ARM32=GOOS=linux GOARCH=armARM3212,180
-LIN32=GOOS=linux GOARCH=386LIN3214,235
-LIN64=GOOS=linux GOARCH=amd64LIN6416,290
-WIN32=GOOS=windows GOARCH=386WIN3218,355
-WIN64=GOOS=windows GOARCH=amd64WIN6420,420
-MAC32=GOOS=darwin GOARCH=386MAC3222,488
-MAC64=GOOS=darwin GOARCH=amd64MAC6424,553
-FREE64=GOOS=freebsd GOARCH=amd64FREE6426,619
-
-outputVersion.go,96
-package mainmain5,10
-func versionInfo(appname string, appversion string) {versionInfo17,183
-
-outputHelp.go,69
-package mainmain5,10
-func myUsage(appname string) {myUsage16,257
