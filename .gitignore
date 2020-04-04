@@ -21,3 +21,7 @@ bin/
 
 # local file with keys - excluded
 keys.txt
+
+# ingnire any TAG files
+tags
+TAGS
