@@ -69,22 +69,20 @@ func main() {
 		myUsage(appname)
 	}
 
-	// TODO: Add switch below as would be neater for runtime options?
-
-	// check if the user requested help?
-	if helpMe {
-		flag.Usage()
-		runtime.Goexit()
+	switch {
+	case helpMe:
+		{
+			flag.Usage()
+			runtime.Goexit()
+		}
+	case showVer:
+		{
+			versionInfo(appname, appversion)
+			runtime.Goexit()
+		}
+	default:
+		// eventually run default call
 	}
-	// check if the user requested app version?
-	if showVer {
-		versionInfo(appname, appversion)
-		runtime.Goexit()
-	}
-
-	// TODO: default switch would run app from here
-	//  if settings exists (ie not first run) then run
-	//  otherwise run 'setup' to create settings
 
 	// Obtain URL from function in 'GetURL.go' source file
 	// TODO: get coords from settings first
