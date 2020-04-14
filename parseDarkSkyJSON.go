@@ -112,7 +112,8 @@ func parseDarkSkyJSON(url string) {
 		fmt.Println("DEBUG: JSON parsed data values end\n")
 	}
 
-	// output all JSON aquired data via function in 'output.go' source file
+	// output all JSON aquired data via function in 'outputWeather.go'
+	// source file
 	err = OutputForecast(ParsedData)
 	if err != nil {
 		fmt.Println(err)
