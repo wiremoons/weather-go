@@ -59,7 +59,6 @@ func requestUserSettingInput() {
 }
 
 // depending on operating system set the configuration file location
-// use 'wm-weather' app folder name in case another 'weather' app exists
 func getConfigFile() (weatherConfig string) {
 
 	if runtime.GOOS == "windows" {
