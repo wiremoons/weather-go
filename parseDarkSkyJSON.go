@@ -20,12 +20,14 @@ var (
 
 // WeatherMain defines the main top level values to extract from JSON input
 type WeatherMain struct {
-	Tz      string     `json:"timezone"`
-	Lat     float64    `json:"latitude"`
-	Long    float64    `json:"longitude"`
-	Place   string     `json:"place"`
-	Current *Currently `json:"currently"`
-	Daily   *Daily     `json:"daily"`
+	Tz         string     `json:"timezone"`
+	Lat        float64    `json:"latitude"`
+	Long       float64    `json:"longitude"`
+	Place      string     // place via geo lookup
+	LonBearing string     // added manually
+	LatBearing string     // added manually
+	Current    *Currently `json:"currently"`
+	Daily      *Daily     `json:"daily"`
 }
 
 // Currently define sub values to extract from 'currently' JSON input
@@ -97,6 +99,17 @@ func parseDarkSkyJSON(url string) {
 	ParsedData.Current.HTTPStatus = resp.StatusCode
 	// use value obtained from place look up
 	ParsedData.Place = weatherSetting.GeoLocation
+	// add bearing direction for formatting for output
+	if ParsedData.Lat < 0 {
+		ParsedData.LatBearing = "°S"
+	} else {
+		ParsedData.LatBearing = "°N"
+	}
+	if ParsedData.Long < 0 {
+		ParsedData.LonBearing = "°W"
+	} else {
+		ParsedData.LonBearing = "°E"
+	}
 
 	// direct output of parsed JSON values for debug only
 	if debugSwitch {

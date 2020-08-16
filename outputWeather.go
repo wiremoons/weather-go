@@ -15,7 +15,7 @@ var weatherOutTemplate = `
                     
 » Request Status       : {{.Current.HTTPStatus}}
 » Weather timezone     : {{.Tz}}
-» Latitude & longitude : {{.Lat}} °N, longitude: {{.Long}} °N
+» Latitude & longitude : {{.Lat}} {{.LatBearing}}, longitude: {{.Long}} {{.LonBearing}}
 » Weather Location     : {{.Place}}
 » Forcast Time         : {{.Current.DisplayTime}}
 
@@ -38,7 +38,7 @@ Visit: https://darksky.net/poweredby/
 DarkSky API requests made: {{.Current.DarkSkyReq}}
 `
 
-// function to output the weather forecast data
+// OutputForecast function to build and output the weather forecast data
 //
 func OutputForecast(ParsedData WeatherMain) (err error) {
 	// check and build the template so the data field values are added
