@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"runtime"
 )
 
@@ -18,14 +19,15 @@ var (
 	weatherSetting WeatherSettings
 )
 
-// structure to hold the configuration and settings for the weather app
+// WeatherSettings structure to hold the configuration and settings for the weather app
 // stored and loaded from JSON setting file in function below
 type WeatherSettings struct {
-	GoogleApiKey int64   `json:"googleapikey"`
-	Latitude     float64 `json:"latitude"`
-	Longitude    float64 `json:"longitude"`
-	LatLong      string  `json:"latlong"`
-	GeoLocation  string  `json:"geolocation"`
+	GoogleAPIKey  string  `json:"googleapikey"`
+	DarkSkyAPIKey string  `json:"darkskyapikey"`
+	Latitude      float64 `json:"latitude"`
+	Longitude     float64 `json:"longitude"`
+	LatLong       string  `json:"latlong"`
+	GeoLocation   string  `json:"geolocation"`
 }
 
 // obtain the setting to run
@@ -46,8 +48,27 @@ func getSettings() (err error) {
 		return nil
 	}
 
-	// no existing settings file - so create one...
+	// no existing settings file - so create some default settings...
 	requestUserSettingInput()
+	return nil
+
+}
+
+// obtain the setting to run
+func saveSettings() (err error) {
+
+	// get the configuration file and path based on OS
+	weatherConfig = getConfigFile()
+	// create the config file directory if needed
+	chkPath := filepath.Dir(weatherConfig)
+	os.MkdirAll(chkPath, os.ModePerm)
+
+	// save the weather setting into the struct 'WeatherSettings'
+	err = saveWeatherSetting(weatherConfig)
+	if err != nil {
+		fmt.Println("ERROR saving settings: ", err)
+		return err
+	}
 	return nil
 
 }
@@ -55,6 +76,13 @@ func getSettings() (err error) {
 // ask the user to input some settings to create an initial config
 func requestUserSettingInput() {
 	fmt.Println("Initial settings required for weather forecast area")
+	// set some defaults in the config file - as none exist yet...
+	weatherSetting.GoogleAPIKey = ""
+	weatherSetting.DarkSkyAPIKey = ""
+	weatherSetting.Latitude = 51.419212
+	weatherSetting.Longitude = -3.291481
+	weatherSetting.LatLong = "51.419212,-3.291481"
+	weatherSetting.GeoLocation = "Barry. Wales"
 	return
 }
 
@@ -100,7 +128,7 @@ func loadWeatherSetting(weatherConfig string) (err error) {
 // save the weather setting from the struct 'WeatherSettings'
 func saveWeatherSetting(weatherConfig string) (err error) {
 
-	jsonConfig, err := json.Marshal(weatherConfig)
+	jsonConfig, err := json.Marshal(weatherSetting)
 	if err != nil {
 		fmt.Println("ERROR when marshaling settings to JSON :", err)
 		return err

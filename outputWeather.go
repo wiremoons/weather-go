@@ -10,18 +10,18 @@ import (
 )
 
 // The weather forecast output to screen template
-var weatherOutTmpl = `
+var weatherOutTemplate = `
                           WEATHER FORECAST
                     
-» Request Status: {{.Current.HttpStatus}}
-» Weather timezone is: '{{.Tz}}' at latitude: '{{.Lat}}' and longitude: '{{.Long}}'
-» Weather Location is: 'TODO'
+» Request Status       : {{.Current.HTTPStatus}}
+» Weather timezone     : {{.Tz}}
+» Latitude & longitude : {{.Lat}} °N, longitude: {{.Long}} °N
+» Weather Location     : {{.Place}}
+» Forcast Time         : {{.Current.DisplayTime}}
 
 ∞∞ Forecast ∞∞
 
-» Time: {{.Current.DisplayTime}}
-
-» Weather Currenty:
+» Weather Currently:
         Summary:     {{.Current.Summary}}
         Windspeed:   {{.Current.WindSpd}}
         Temperature: {{.Current.Temp}}°C feels like: {{.Current.FLTemp}}°C
@@ -44,7 +44,7 @@ func OutputForecast(ParsedData WeatherMain) (err error) {
 	// check and build the template so the data field values are added
 	// and the final output is displayed. Check for any error, and
 	// abort if one is found.
-	t := template.Must(template.New("weather").Parse(weatherOutTmpl))
+	t := template.Must(template.New("weather").Parse(weatherOutTemplate))
 
 	err = t.ExecuteTemplate(os.Stdout, "weather", ParsedData)
 

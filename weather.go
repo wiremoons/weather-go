@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	appversion = "0.3.0"
+	appversion = "0.4.0"
 	appname    string
 	// flag() variables CLI args
 	debugSwitch bool
@@ -84,9 +84,17 @@ func main() {
 		// eventually run default call
 	}
 
+	// get settings stored in local config file
+	_ = getSettings()
+
+	// weatherSetting.Latitude = 51.419212
+	// weatherSetting.Longitude = -3.291481
+	// weatherSetting.LatLong = "51.419212,-3.291481"
+	// weatherSetting.GeoLocation = "Barry. Wales"
+
 	// Obtain URL from function in 'GetURL.go' source file
 	// TODO: get coords from settings first
-	url, err := GetURL("51.419212,-3.291481")
+	url, err := GetURL(weatherSetting.LatLong)
 	// exit app if url request errors
 	if err != nil {
 		fmt.Println("\nWARNING HTTP ERROR:\n", err)
@@ -94,12 +102,17 @@ func main() {
 	}
 
 	// get place name from: getGeoLoc.go
-	myPlace := getLocPlace("51.419212,-3.291481")
-
-	fmt.Println("PLACE IS:", myPlace)
+	myPlace := getLocPlace(weatherSetting.LatLong)
+	weatherSetting.GeoLocation = myPlace
+	if debugSwitch {
+		fmt.Println("DEBUG: var 'myPlace is: '", myPlace, "'")
+		fmt.Println("DEBUG: setting 'GeoLocation is: '", weatherSetting.GeoLocation, "'")
+	}
 
 	// call function in parseJSON.go to obtain weather data and output
 	parseDarkSkyJSON(url)
+	// save the settings used
+	saveSettings()
 
 	// END PROGRAM
 }

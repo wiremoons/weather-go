@@ -12,11 +12,11 @@ import (
 )
 
 var (
-	// used to hold the JSON parsed data - use pointer instead?
+	// PlaceData used to hold the JSON parsed data - use pointer instead?
 	PlaceData Place
 )
 
-// Struct used from JSON to find place from Long + Lat lookup
+// Place structure used from JSON to find place from Long + Lat lookup
 type Place struct {
 	Results []struct {
 		FormattedAddress string `json:"formatted_address"`
@@ -35,6 +35,10 @@ func getAPIKey() (apiGeoKey string, err error) {
 	if apiGeoKey == "" {
 		return "", fmt.Errorf("Google API key not available as environment variable: '$GAPI'")
 	}
+
+	// Add the DSAPI key to the weatherSetting structure for storing on exit
+	weatherSetting.GoogleAPIKey = apiGeoKey
+
 	return apiGeoKey, nil
 }
 
@@ -94,7 +98,7 @@ func getLocPlace(latLong string) string {
 		fmt.Println("DEBUG HTTP Headers end\n")
 	}
 
-	// unmarshall the JSON data received into the 'Place' structs
+	// unmarshal the JSON data received into the 'Place' structure
 	json.NewDecoder(resp.Body).Decode(&PlaceData)
 
 	// save the DarkSky API requests made so far today for info
@@ -129,11 +133,12 @@ func getLocLongLat(locTown, locCountry string) string {
 
 	if err != nil {
 		fmt.Println("ERROR: ", err)
-		fmt.Println("Set environment variable for Google Places API key as: 'export GAPI=\"<api_key_here>\"'")
+		fmt.Println("Set environment variable for Google Places API key.")
+		fmt.Println("For Linux use:\n\t\t'export GAPI=\"<api_key_here>\"'\n\n")
 		runtime.Goexit()
 	}
 	if debugSwitch {
-		fmt.Println("API Key is:", apiKey)
+		fmt.Println("GAPI Key is:", apiKey)
 	}
 	return ""
 }
