@@ -97,8 +97,12 @@ func parseDarkSkyJSON(url string) {
 	ParsedData.Current.DarkSkyReq = resp.Header.Get("X-Forecast-Api-Calls")
 	// save the status code
 	ParsedData.Current.HTTPStatus = resp.StatusCode
+
+	// Populate additional calculated fields for ParsedData structure - not obtained from JSON:
+
 	// use value obtained from place look up
 	ParsedData.Place = weatherSetting.GeoLocation
+
 	// add bearing direction for formatting for output
 	if ParsedData.Lat < 0 {
 		ParsedData.LatBearing = "°S"
@@ -116,7 +120,9 @@ func parseDarkSkyJSON(url string) {
 		fmt.Println("\nDEBUG: JSON parsed data values are:")
 		fmt.Println("\tTimezone is:", ParsedData.Tz)
 		fmt.Println("\tLatitude is:", ParsedData.Lat)
+		fmt.Println("\tLatitude bearing is:", ParsedData.LatBearing)
 		fmt.Println("\tLongitude is:", ParsedData.Long)
+		fmt.Println("\tLongitude bearing is:", ParsedData.LonBearing)
 		fmt.Println("\tPlace is:", ParsedData.Place)
 		fmt.Println("\tTime is:", ParsedData.Current.Time.Format("Monday 02 Jan 2006 at 15:04 (MST)"))
 		fmt.Println("\tDisplay Time is:", ParsedData.Current.DisplayTime)
