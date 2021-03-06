@@ -31,7 +31,8 @@ func GetURL(coord string) (url string, err error) {
 	if err != nil {
 		fmt.Println("ERROR: ", err)
 		fmt.Println("Set environment variable for DarkSky API key.")
-		fmt.Println("For Linux use:\n\t\t'export DSAPI=\"<api_key_here>\"'\n\n")
+		fmt.Println("  For Linux use:    'export DSAPI=\"<api_key_here>\"'")
+		fmt.Println("  For Windows use:  '$env:DSAPI=\"add_api_key_here\"'\n\n")
 		runtime.Goexit()
 	}
 	if debugSwitch {

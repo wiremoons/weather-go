@@ -50,7 +50,8 @@ func getLocPlace(latLong string) string {
 
 	if err != nil {
 		fmt.Println("ERROR: ", err)
-		fmt.Println("Set environment variable for Google Places API key as: 'export GAPI=\"<api_key_here>\"'")
+		fmt.Println("Set environment variable for Google Places API key as: 'export GAPI=\"api_key_here\"'")
+		fmt.Println("or on Windows as:  '$env:GAPI=\"add_api_key_here\"'")
 		return "UNKNOWN"
 	}
 	if debugSwitch {
