@@ -20,7 +20,7 @@ var (
 	debugSwitch bool
 	helpMe      bool
 	showVer     bool
-	err         error
+	//err         error  <- goland says not needed?
 )
 
 // init() always runs before the applications main() function
@@ -112,7 +112,9 @@ func main() {
 	// call function in parseJSON.go to obtain weather data and output
 	parseDarkSkyJSON(url)
 	// save the settings used
-	saveSettings()
+	if err := saveSettings(); err != nil {
+		fmt.Printf("ERROR: unable to save settings: %v", err)
+	}
 
 	// END PROGRAM
 }
